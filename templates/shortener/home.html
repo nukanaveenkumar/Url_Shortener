@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 1rem 0;
+            position: relative;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Signature */
+        .signature {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1rem;
+            font-weight: normal;
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form */
+        form {
+            margin-bottom: 1.5rem;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #4caf50;
+            color: white;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Shortened URL */
+        .shortened-url {
+            text-align: center;
+            padding: 1rem;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 4px;
+        }
+
+        .shortened-url a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .shortened-url a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        URL Shortener
+        <div class="signature">NNK</div>
+    </header>
+    <div class="container">
+        <!-- Form for inputting original URL -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Shorten URL</button>
+        </form>
+
+        <!-- Display the shortened URL if it exists -->
+        {% if shortened_url %}
+        <div class="shortened-url">
+            <p>Your Shortened URL:</p>
+            <a href="http://127.0.0.1:8000/{{ shortened_url }}" target="_blank">
+                http://127.0.0.1:8000/{{ shortened_url }}
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
